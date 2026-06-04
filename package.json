@@ -1,0 +1,51 @@
+{
+  "name": "@carlwr/docopt-tmlanguage",
+  "version": "0.1.0",
+  "description": "TextMate grammar for docopt-style command synopsis notation",
+  "license": "MIT",
+  "author": "Carl Wernhoff",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlwr/docopt-tmlanguage.git"
+  },
+  "homepage": "https://github.com/carlwr/docopt-tmlanguage#readme",
+  "bugs": {
+    "url": "https://github.com/carlwr/docopt-tmlanguage/issues"
+  },
+  "type": "module",
+  "files": [
+    "docopt.tmLanguage.json",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./docopt.tmLanguage.json",
+    "./grammar.json": "./docopt.tmLanguage.json",
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "textmate",
+    "tmlanguage",
+    "grammar",
+    "syntax-highlighting",
+    "docopt",
+    "shiki"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@carlwr/textmate-validate": "^1.0.1",
+    "vscode-tmgrammar-test": "^0.1.3"
+  },
+  "scripts": {
+    "check": "textmate-validate -v ./docopt.tmLanguage.json",
+    "test": "vscode-tmgrammar-test -g ./docopt.tmLanguage.json 'tests/**/*.docopt'",
+    "qa": "npm run check && npm run test",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "preversion": "npm run qa",
+    "postversion": "git push --follow-tags",
+    "prepublishOnly": "npm run qa"
+  }
+}

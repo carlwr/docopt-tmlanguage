@@ -1,0 +1,160 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "docopt",
+  "scopeName": "source.docopt",
+  "patterns": [
+    {
+      "include": "#tokens"
+    }
+  ],
+  "repository": {
+    "tokens": {
+      "patterns": [
+        { "include": "#comment" },
+        { "include": "#usage-header" },
+        { "include": "#program" },
+        { "include": "#string" },
+        { "include": "#repetition" },
+        { "include": "#argument" },
+        { "include": "#alternation" },
+        { "include": "#bracket-open" },
+        { "include": "#bracket-close" },
+        { "include": "#brace-open" },
+        { "include": "#brace-close" },
+        { "include": "#paren-open" },
+        { "include": "#paren-close" },
+        { "include": "#assignment" },
+        { "include": "#separator-comma" },
+        { "include": "#separator-colon" },
+        { "include": "#option-long" },
+        { "include": "#option-short" },
+        { "include": "#option-bare" },
+        { "include": "#sign" },
+        { "include": "#identifier" }
+      ]
+    },
+    "comment": {
+      "match": "^#.*$",
+      "name": "comment.line.number-sign.docopt"
+    },
+    "usage-header": {
+      "match": "^[ \\t]*(?:[Uu][Ss][Aa][Gg][Ee]:|SYNOPSIS)[ \\t]*$",
+      "name": "comment.line.usage.docopt"
+    },
+    "program": {
+      "match": "^[ \\t]*([_a-zA-Z][_a-zA-Z0-9]*)",
+      "captures": {
+        "1": { "name": "entity.name.function.docopt" }
+      }
+    },
+    "identifier": {
+      "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*(?:[./][_a-zA-Z0-9]+)*",
+      "name": "variable.parameter.docopt"
+    },
+    "argument": {
+      "begin": "<",
+      "end": ">",
+      "name": "variable.parameter.docopt",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.variable.begin.docopt" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.variable.end.docopt" }
+      }
+    },
+    "string": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.docopt",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.docopt",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.docopt",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.docopt",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "repetition": {
+      "match": "\\.\\.\\.",
+      "name": "keyword.operator.ellipsis.docopt"
+    },
+    "alternation": {
+      "match": "\\|",
+      "name": "keyword.operator.alternation.docopt"
+    },
+    "bracket-open": {
+      "match": "\\[",
+      "name": "punctuation.section.brackets.begin.docopt"
+    },
+    "bracket-close": {
+      "match": "\\]",
+      "name": "punctuation.section.brackets.end.docopt"
+    },
+    "brace-open": {
+      "match": "\\{",
+      "name": "punctuation.section.braces.begin.docopt"
+    },
+    "brace-close": {
+      "match": "\\}",
+      "name": "punctuation.section.braces.end.docopt"
+    },
+    "paren-open": {
+      "match": "\\(",
+      "name": "punctuation.section.parens.begin.docopt"
+    },
+    "paren-close": {
+      "match": "\\)",
+      "name": "punctuation.section.parens.end.docopt"
+    },
+    "assignment": {
+      "match": "=",
+      "name": "keyword.operator.assignment.docopt"
+    },
+    "separator-comma": {
+      "match": ",",
+      "name": "punctuation.separator.comma.docopt"
+    },
+    "separator-colon": {
+      "match": ":",
+      "name": "punctuation.separator.colon.docopt"
+    },
+    "option-long": {
+      "match": "(--)([_a-zA-Z][-_a-zA-Z0-9]*)(?:(=)([_a-zA-Z0-9][_a-zA-Z0-9]*(?:[./][_a-zA-Z0-9]+)*))?",
+      "captures": {
+        "1": { "name": "punctuation.definition.option.long.docopt" },
+        "2": { "name": "entity.name.tag.docopt" },
+        "3": { "name": "keyword.operator.assignment.docopt" },
+        "4": { "name": "variable.parameter.docopt" }
+      }
+    },
+    "option-short": {
+      "match": "([-+])([_a-zA-Z][_a-zA-Z0-9]*)",
+      "captures": {
+        "1": { "name": "punctuation.definition.option.short.docopt" },
+        "2": { "name": "entity.name.tag.docopt" }
+      }
+    },
+    "option-bare": {
+      "match": "--",
+      "name": "keyword.operator.docopt"
+    },
+    "sign": {
+      "match": "[-+]",
+      "name": "punctuation.definition.option.short.docopt"
+    }
+  }
+}

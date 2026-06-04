@@ -1,0 +1,6 @@
+{
+  // rudimentary syntax highlighting for test files:
+  "files.associations": {
+    "*.docopt": "shellscript"
+  }
+}

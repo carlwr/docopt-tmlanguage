@@ -1,0 +1,171 @@
+# SYNTAX TEST "source.docopt" "docopt grammar"
+
+# comments
+# --------
+
+# a note
+#<--------       comment.line.number-sign.docopt
+
+# usage headers
+# -------------
+
+# "usage:" (any case) or "SYNOPSIS" (caps), trailing spaces only, scoped as a comment
+
+usage:
+#<------         comment.line.usage.docopt
+#^^^^^           comment.line.usage.docopt
+
+Usage:
+#<------         comment.line.usage.docopt
+#^^^^^           comment.line.usage.docopt
+
+SYNOPSIS
+#<--------       comment.line.usage.docopt
+#^^^^^^^         comment.line.usage.docopt
+
+# program & arguments
+# --------------------
+
+prog
+#<----           entity.name.function.docopt
+#^^^             entity.name.function.docopt
+
+prog arg
+#<-              entity.name.function.docopt
+#^^^             entity.name.function.docopt
+#    ^^^         variable.parameter.docopt
+
+prog <file>
+#    ^           variable.parameter.docopt
+#    ^           punctuation.definition.variable.begin.docopt
+#     ^^^^       variable.parameter.docopt
+#         ^      variable.parameter.docopt
+#         ^      punctuation.definition.variable.end.docopt
+
+# options
+# -------
+
+# flag name is entity.name.tag; an option-argument value is variable.parameter
+
+prog -a
+#    ^           punctuation.definition.option.short.docopt
+#     ^          entity.name.tag.docopt
+
+prog +a
+#    ^           punctuation.definition.option.short.docopt
+#     ^          entity.name.tag.docopt
+
+prog -qsLP
+#    ^           punctuation.definition.option.short.docopt
+#     ^^^^       entity.name.tag.docopt
+
+prog --opt=val
+#    ^^          punctuation.definition.option.long.docopt
+#      ^^^       entity.name.tag.docopt
+#         ^      keyword.operator.assignment.docopt
+#          ^^^   variable.parameter.docopt
+
+prog --no-color
+#    ^^          punctuation.definition.option.long.docopt
+#      ^^^^^^^^  entity.name.tag.docopt
+
+prog -- arg
+#    ^^          keyword.operator.docopt
+
+# strings
+# -------
+
+prog 'single'
+#    ^^^^^^^^    string.quoted.single.docopt
+
+prog 'two words'
+#    ^^^^^^^^^^^ string.quoted.single.docopt
+
+prog "d\"q"
+#    ^           string.quoted.double.docopt
+#      ^^        constant.character.escape.docopt
+
+# groups
+# ------
+
+prog [opt]
+#    ^           punctuation.section.brackets.begin.docopt
+#        ^       punctuation.section.brackets.end.docopt
+
+prog [ opt ]
+#    ^           punctuation.section.brackets.begin.docopt
+#      ^^^       variable.parameter.docopt
+#          ^     punctuation.section.brackets.end.docopt
+
+prog [-a]
+#    ^           punctuation.section.brackets.begin.docopt
+#     ^          punctuation.definition.option.short.docopt
+#      ^         entity.name.tag.docopt
+#       ^        punctuation.section.brackets.end.docopt
+
+prog [[-a] -b]
+#    ^           punctuation.section.brackets.begin.docopt
+#     ^          punctuation.section.brackets.begin.docopt
+#        ^       punctuation.section.brackets.end.docopt
+#            ^   punctuation.section.brackets.end.docopt
+
+prog [[-a] -b]
+#      ^         punctuation.definition.option.short.docopt
+#       ^        entity.name.tag.docopt
+#          ^     punctuation.definition.option.short.docopt
+#           ^    entity.name.tag.docopt
+
+prog {a|b}
+#    ^           punctuation.section.braces.begin.docopt
+#      ^         keyword.operator.alternation.docopt
+#        ^       punctuation.section.braces.end.docopt
+
+prog (arg)
+#    ^           punctuation.section.parens.begin.docopt
+#        ^       punctuation.section.parens.end.docopt
+
+# repetition
+# ----------
+
+# '...' is the only repetition operator; there is no postfix '?'/'*'/'+'
+# quantifier notation in docopt-style synopses, so '?'/'*' are left unscoped
+
+prog opt...
+#        ^^^     keyword.operator.ellipsis.docopt
+
+prog a.b...
+#    ^^^         variable.parameter.docopt
+#       ^^^      keyword.operator.ellipsis.docopt
+
+# separators
+# ----------
+
+prog a, b: c
+#     ^          punctuation.separator.comma.docopt
+#        ^       punctuation.separator.colon.docopt
+
+# dotted & slashed names
+# ----------------------
+
+# '.' and '/' are name characters (subcommands, paths), not operators
+
+prog a.b
+#    ^^^         variable.parameter.docopt
+
+prog path/to/x
+#    ^^^^^^^^^   variable.parameter.docopt
+
+# '+' and '-' always get the same scope — whether introducing an option or
+# standing alone — so they read as the same character; never a quantifier
+
+prog {+|-}
+#    ^           punctuation.section.braces.begin.docopt
+#     ^          punctuation.definition.option.short.docopt
+#      ^         keyword.operator.alternation.docopt
+#       ^        punctuation.definition.option.short.docopt
+#        ^       punctuation.section.braces.end.docopt
+
+# a trailing '+' is a bare sign, not a postfix quantifier
+prog a+
+#    ^           variable.parameter.docopt
+#     ^          punctuation.definition.option.short.docopt
