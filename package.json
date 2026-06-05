@@ -1,6 +1,6 @@
 {
   "name": "@carlwr/docopt-tmlanguage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TextMate grammar for docopt-style command synopsis notation",
   "license": "MIT",
   "author": "Carl Wernhoff",
